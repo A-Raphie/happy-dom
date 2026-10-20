@@ -91,6 +91,7 @@ import MutationObserver from './mutation-observer/MutationObserver.js';
 import MutationRecord from './mutation-observer/MutationRecord.js';
 import Attr from './nodes/attr/Attr.js';
 import Comment from './nodes/comment/Comment.js';
+import CDATASection from './nodes/cdata-section/CDATASection.js';
 import DocumentFragment from './nodes/document-fragment/DocumentFragment.js';
 import DocumentType from './nodes/document-type/DocumentType.js';
 import Document from './nodes/document/Document.js';
@@ -306,6 +307,7 @@ export {
 	ClipboardEvent,
 	ClipboardItem,
 	Comment,
+	CDATASection,
 	CookieChangeEvent,
 	CookieSameSiteEnum,
 	CookieStore,

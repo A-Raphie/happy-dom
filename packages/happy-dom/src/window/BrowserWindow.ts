@@ -180,6 +180,7 @@ import HTMLVideoElement from '../nodes/html-video-element/HTMLVideoElement.js';
 import Node from '../nodes/node/Node.js';
 import NodeList from '../nodes/node/NodeList.js';
 import ProcessingInstruction from '../nodes/processing-instruction/ProcessingInstruction.js';
+import CDATASection from '../nodes/cdata-section/CDATASection.js';
 import ShadowRoot from '../nodes/shadow-root/ShadowRoot.js';
 import SVGElement from '../nodes/svg-element/SVGElement.js';
 import type Text from '../nodes/text/Text.js';
@@ -403,6 +404,7 @@ export default class BrowserWindow extends EventTarget implements INodeJSGlobal 
 	public readonly Attr = Attr;
 	public readonly ShadowRoot = ShadowRoot;
 	public readonly ProcessingInstruction = ProcessingInstruction;
+	public readonly CDATASection = CDATASection;
 	public readonly Element = Element;
 	public readonly CharacterData = CharacterData;
 	public readonly DocumentType = DocumentType;

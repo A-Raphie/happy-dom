@@ -17,6 +17,7 @@ import type CSSStyleSheet from '../../css/CSSStyleSheet.js';
 import type HTMLScriptElement from '../html-script-element/HTMLScriptElement.js';
 import type HTMLElement from '../html-element/HTMLElement.js';
 import type Comment from '../comment/Comment.js';
+import type CDATASection from '../cdata-section/CDATASection.js';
 import type Text from '../text/Text.js';
 import type NodeList from '../node/NodeList.js';
 import HTMLCollection from '../element/HTMLCollection.js';
@@ -2213,6 +2214,34 @@ export default class Document extends Node {
 	 */
 	public hasFocus(): boolean {
 		return !!this.activeElement;
+	}
+
+	/**
+	 * Creates a CDATA section node.
+	 *
+	 * Only supported in XML documents.
+	 *
+	 * @param data Data.
+	 * @returns CDATASection.
+	 */
+	public createCDATASection(data: string): CDATASection {
+		if (arguments.length < 1) {
+			throw new this[PropertySymbol.window].TypeError(
+				`Failed to execute 'createCDATASection' on 'Document': 1 argument required, but only ${arguments.length} present.`
+			);
+		}
+		if (this[PropertySymbol.contentType] === 'text/html') {
+			throw new this[PropertySymbol.window].DOMException(
+				"Failed to execute 'createCDATASection' on 'Document': This operation is not supported for HTML documents.",
+				DOMExceptionNameEnum.notSupportedError
+			);
+		}
+		// We should use the NodeFactory and not the class constructor, so that owner document will be this document
+		return NodeFactory.createNode(
+			this,
+			this[PropertySymbol.window].CDATASection,
+			String(data)
+		);
 	}
 
 	/**
