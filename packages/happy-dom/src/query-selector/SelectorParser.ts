@@ -45,7 +45,7 @@ const SELECTOR_GROUP_REGEXP = /(\s*[\s,+>~]\s*)|([\[\]\(\)"'])/g;
  * Group 23: Pseudo element (e.g. "::after", "::-webkit-inner-spin-button").
  */
 const SELECTOR_REGEXP =
-	/(\*)|([a-zA-Z0-9\u00A0-\uFFFF-]+)|#(([a-zA-Z0-9\u00A0-\uFFFF_-]|\\.)+)|\.(([a-zA-Z0-9\u00A0-\uFFFF_-]|\\.)+)|\[(([a-zA-Z0-9-_]|\\.)+)\]|\[(([a-zA-Z0-9-_]|\\.)+)\s*([~|^$*]{0,1})\s*=\s*("([^"]*)"|'([^']*)')\s*(s|i){0,1}\]|\[(([a-zA-Z0-9-_]|\\.)+)\s*([~|^$*]{0,1})\s*=\s*(([a-zA-Z0-9\u00A0-\uFFFF_¤£-]|\\.)+)\]|:([a-zA-Z-]+)\s*\(.+\)|:([a-zA-Z-]+)|::([a-zA-Z-]+)/g;
+	/(\*)|((?:[a-zA-Z0-9\u00A0-\uFFFF-]|\\.)+)|#(([a-zA-Z0-9\u00A0-\uFFFF_-]|\\.)+)|\.(([a-zA-Z0-9\u00A0-\uFFFF_-]|\\.)+)|\[(([a-zA-Z0-9-_]|\\.)+)\]|\[(([a-zA-Z0-9-_]|\\.)+)\s*([~|^$*]{0,1})\s*=\s*("([^"]*)"|'([^']*)')\s*(s|i){0,1}\]|\[(([a-zA-Z0-9-_]|\\.)+)\s*([~|^$*]{0,1})\s*=\s*(([a-zA-Z0-9\u00A0-\uFFFF_¤£-]|\\.)+)\]|:([a-zA-Z-]+)\s*\(.+\)|:([a-zA-Z-]+)|::([a-zA-Z-]+)/g;
 
 /**
  * Selector pseudo RegExp.
@@ -363,9 +363,9 @@ export default class SelectorParser {
 
 				selectorItem.tagName = '*';
 			} else if (match[2]) {
-				// Matches tag name, e.g. "div"
+				// Matches tag name, e.g. "div" or an escaped name like "x\:child"
 
-				selectorItem.tagName = match[2].toUpperCase();
+				selectorItem.tagName = match[2].replace(ESCAPED_CHARACTER_REGEXP, '').toUpperCase();
 			} else if (match[3]) {
 				// Matches ID, e.g. "#id"
 
